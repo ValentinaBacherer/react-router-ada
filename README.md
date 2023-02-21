@@ -1,70 +1,64 @@
-# Getting Started with Create React App
+Instalar react router
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+```
+npm i react-router-dom
+```
 
-## Available Scripts
+1. Router setup -> BrowserRouter en index
+2. Estructura del router -> Routes, Route en App
 
-In the project directory, you can run:
+   - home
+   - personal
+   - books
 
-### `npm start`
+   ```
+   <div className='App'>
+      <Routes>
+        <Route path='/' element={<Home />} />
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+        <Route path='/books' element={<BooksList />} />
+        <Route path='/secret' element={<h1>Secret Page</h1>} />
+      </Routes>
+    </div>
+   ```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+3. Navigation
+   Instead of anchor we use `Link` component. Anchor inside, but its not refreshing reloading app.
+4. Dinamic routes and new
+5. 404
 
-### `npm test`
+```
+ <div className='App'>
+      <nav>
+        <li>
+          <Link to='/'>Home</Link>
+        </li>
+        <li>
+          <Link to='/books'>Books</Link>
+        </li>
+      </nav>
+      <Routes>
+        <Route path='/' element={<Home />} />
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+        <Route path='/books' element={<BooksList />} />
+        <Route path='/books/:id' element={<Book />} />
+        <Route path='/secret' element={<h1>Secret Page</h1>} />
+        <Route path='*' element={<h1>Not found</h1>} />
+      </Routes>
+    </div>
+```
 
-### `npm run build`
+6. Nesting Routes
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
+<Routes>
+        <Route path='/' element={<Home />} />
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+        <Route path='/books'>
+          <Route path='' element={<BooksList />} />
+          <Route path=':id' element={<Book />} />
+        </Route>
+        <Route path='/secret' element={<h1>Secret Page</h1>} />
+        <Route path='*' element={<h1>Not found</h1>} />
+</Routes>
+```
